@@ -1,0 +1,9 @@
+<Project>
+ <PropertyGroup>
+   <DefineConstants>WINDOWS_UWP</DefineConstants>
+   <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+ </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221116.1" />
+    </ItemGroup>
+</Project>

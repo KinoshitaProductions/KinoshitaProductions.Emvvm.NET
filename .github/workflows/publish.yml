@@ -1,0 +1,78 @@
+name: Publish
+on:
+  push:
+    tags:
+      - v*.*.*
+jobs:
+  scan:
+    name: Build and analyze
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/KinoshitaProductions/index.json"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"KinoshitaProductions_KinoshitaProductions.Emvvm.NET" /o:"kinoshitaproductions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /v:"$("${{ github.ref_name }}".Substring(1))"
+          dotnet build KinoshitaProductions.Emvvm.csproj
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+  publish:
+    name: Build and publish
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Build and publish
+        shell: powershell
+        run: |
+          dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/KinoshitaProductions/index.json"
+          dotnet pack KinoshitaProductions.Emvvm.csproj -c Release -p:PackageVersion=$("${{ github.ref_name }}".Substring(1))
+          dotnet nuget push "bin/Release/KinoshitaProductions.Emvvm.$("${{ github.ref_name }}".Substring(1)).nupkg" --source "github"
+          dotnet nuget push "bin/Release/KinoshitaProductions.Emvvm.$("${{ github.ref_name }}".Substring(1)).nupkg" --api-key ${{ secrets.NUGET_TOKEN }} --source https://api.nuget.org/v3/index.json
+  publish-uwp:
+    name: Build and publish (UWP)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Build and publish (UWP)
+        shell: powershell
+        run: |
+          dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/KinoshitaProductions/index.json"
+          msbuild KinoshitaProductions.Emvvm.UWP.csproj -t:restore
+          msbuild KinoshitaProductions.Emvvm.UWP.csproj -t:rebuild -verbosity:diag /p:Configuration=Release
+          msbuild KinoshitaProductions.Emvvm.UWP.csproj -t:pack /p:Configuration=Release /p:PackageVersion=$("${{ github.ref_name }}".Substring(1)) /p:PackageOutputPath=".\bin\Release"
+          dotnet nuget push "bin/Release/KinoshitaProductions.Emvvm.UWP.$("${{ github.ref_name }}".Substring(1)).nupkg" --source "github"
+          dotnet nuget push "bin/Release/KinoshitaProductions.Emvvm.UWP.$("${{ github.ref_name }}".Substring(1)).nupkg" --api-key ${{ secrets.NUGET_TOKEN }} --source https://api.nuget.org/v3/index.json

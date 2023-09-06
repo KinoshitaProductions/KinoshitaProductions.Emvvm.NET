@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <DefineConstants>ANDROID</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.5.1.1" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1" />
+    <PackageReference Include="Xamarin.Google.Guava.ListenableFuture" Version="1.0.0.10" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{43421869-9CBD-4435-8C3F-5AD80087B91A}") = "KinoshitaProductions.Emvvm", "KinoshitaProductions.Emvvm.csproj", "{C039A143-D087-4868-A612-B5B90B171998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinoshitaProductions.Emvvm.UWP", "KinoshitaProductions.Emvvm.UWP.csproj", "{B7105A51-1114-4157-9773-5E913C65A02D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C039A143-D087-4868-A612-B5B90B171998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C039A143-D087-4868-A612-B5B90B171998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C039A143-D087-4868-A612-B5B90B171998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C039A143-D087-4868-A612-B5B90B171998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7105A51-1114-4157-9773-5E913C65A02D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7105A51-1114-4157-9773-5E913C65A02D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7105A51-1114-4157-9773-5E913C65A02D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7105A51-1114-4157-9773-5E913C65A02D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60F84241-23FE-46AC-9E1E-44E6588A1FCD}
+	EndGlobalSection
+EndGlobal

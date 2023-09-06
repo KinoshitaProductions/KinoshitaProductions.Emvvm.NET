@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net7.0;net7.0-android</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);net7.0-windows10.0.17763;</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ProjectGuid>{78F4AE2D-1589-44E9-8068-2AAF56345BE9}</ProjectGuid>
+    <PackageId>KinoshitaProductions.Emvvm</PackageId>
+    <AssemblyName>KinoshitaProductions.Emvvm</AssemblyName>
+    <RootNamespace>KinoshitaProductions.Emvvm</RootNamespace>
+    <Authors>Kinoshita Shimizu</Authors>
+    <Company>Kinoshita Productions</Company>
+    <PackageDescription>This is our EMMVM (UI bindings) library.</PackageDescription>
+    <RepositoryUrl>https://github.com/KinoshitaProductions/KinoshitaProductions.Emvvm.NET</RepositoryUrl>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+
+  <ImportGroup Condition=" $(TargetFramework.EndsWith('-android')) ">
+    <Import Project="KinoshitaProductions.Emvvm.Android.props" />
+  </ImportGroup>
+  <ImportGroup Condition=" $(TargetFramework.Contains('-windows')) ">
+	  <Import Project="KinoshitaProductions.Emvvm.Windows.props" />
+  </ImportGroup>
+  <ImportGroup Condition=" $(TargetFramework) != 'netstandard2.0' ">
+	  <Import Project="KinoshitaProductions.Emvvm.NotNetStandard.props" />
+  </ImportGroup>
+
+  <ItemGroup>
+    <PackageReference Include="KinoshitaProductions.Common" Version="1.0.0" />
+    <PackageReference Include="Serilog" Version="2.12.0" />
+  </ItemGroup>
+</Project>

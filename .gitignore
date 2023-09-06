@@ -1,0 +1,13 @@
+bin
+obj
+packages/
+UpgradeLog\.htm
+\.vs/
+*.log
+*.user
+.DS_Store
+Cache
+*.TMP
+*.Cache
+sonarlint/
+sonarlint-state.xml
