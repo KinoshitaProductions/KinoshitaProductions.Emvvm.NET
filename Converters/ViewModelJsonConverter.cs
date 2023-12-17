@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Serilog;
 
-namespace KinoshitaProductions.Emvvm.Helpers
+namespace KinoshitaProductions.Emvvm.Converters
 {
     public class ViewModelJsonConverter : JsonConverter
     {

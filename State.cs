@@ -11,8 +11,6 @@
         }
 #endif
 #endif
-        // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
-        public static Screen Screen { get; set; } = new ();
         // ReSharper disable once MemberCanBePrivate.Global
         public static int LastViewModelGeneration { get; private set; } = -1;
         // ReSharper disable once UnusedAutoPropertyAccessor.Global

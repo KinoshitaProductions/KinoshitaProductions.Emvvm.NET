@@ -5,7 +5,7 @@ namespace KinoshitaProductions.Emvvm.Services
     /// <summary>
     /// Basic execution engine. Does only handle basic actions (start, stop, pause, resume, fail).
     /// </summary>
-    public abstract class StatefulNavigationEngine: StatefulEngine
+    public abstract class StatefulNavigationEngine : StatefulEngine
     {
         #region STATEFUL_NAVIGATION_ENGINE
         /// <summary>

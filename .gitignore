@@ -11,3 +11,5 @@ Cache
 *.Cache
 sonarlint/
 sonarlint-state.xml
+
+.idea/

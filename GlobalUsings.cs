@@ -2,6 +2,7 @@ global using KinoshitaProductions.Emvvm.Base;
 #if __ANDROID__
 global using KinoshitaProductions.Emvvm.CollectionBinders;
 #endif
+global using KinoshitaProductions.Emvvm.Converters;
 global using KinoshitaProductions.Emvvm.Enums;
 global using KinoshitaProductions.Emvvm.Helpers;
 global using KinoshitaProductions.Emvvm.Interfaces;

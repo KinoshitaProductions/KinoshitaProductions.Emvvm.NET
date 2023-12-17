@@ -73,6 +73,7 @@
     <Compile Include="Binders/**/*.cs" />
     <Compile Include="Bindings/**/*.cs" />
     <Compile Include="CollectionBinders/**/*.cs" />
+    <Compile Include="Converters/**/*.cs" />
     <Compile Include="Enums/**/*.cs" />
     <Compile Include="Helpers/**/*.cs" />
     <Compile Include="Interfaces/**/*.cs" />

@@ -7,11 +7,9 @@ using Serilog;
 /// The application engine controls and watches over the other sub engines.
 /// </summary>
 
-public class StateEngine<TStateMetadata> : Engine where TStateMetadata : StateMetadataDefinition, new()
+public abstract class StateEngine<TStateMetadata> : Engine where TStateMetadata : StateMetadataDefinition, new()
 {
-
     #region STATE_SAVING
-
     private bool ForceTimestampUpdate => _stateMetadata.Timestamp.AddMinutes(2) < DateTime.Now || _stateMetadata.LastViewModelGeneration != State.LastViewModelGeneration;
 
     private bool _isRestoring;

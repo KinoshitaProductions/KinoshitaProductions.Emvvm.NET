@@ -208,5 +208,12 @@
             return true;
         }
 #endif
+        // ReSharper disable once ClassNeverInstantiated.Global
+        public sealed class MarshallerOptions
+        {
+#if ANDROID
+            public Func<Activity?> GetCurrentActivityFn { get; set; } = () => null;
+#endif
+        }
     }
 }

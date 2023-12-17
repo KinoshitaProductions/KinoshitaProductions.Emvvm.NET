@@ -6,7 +6,7 @@ namespace KinoshitaProductions.Emvvm.Services
     /// <summary>
     /// Basic execution engine. Does only handle basic actions (start, stop, pause, resume, fail).
     /// </summary>
-    public abstract class StatefulEngine: Engine, IStatefulAsJson
+    public abstract class StatefulEngine : Engine, IStatefulAsJson
     {
         private int _referencedByCount;
         public bool IsReferenced => _referencedByCount > 0;
