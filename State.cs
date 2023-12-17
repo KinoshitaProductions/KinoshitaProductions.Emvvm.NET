@@ -262,7 +262,9 @@
 #endif
             ;
 
+#pragma warning disable S4158
             foreach (var deactivatedDepth in deactivatedDepths)
+#pragma warning restore S4158
             {
                 // we must check if the number exceeds the latest valid state
                 // if not, we would be deleting a valid state!

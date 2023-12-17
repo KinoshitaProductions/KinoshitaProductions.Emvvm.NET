@@ -10,11 +10,45 @@ namespace KinoshitaProductions.Emvvm.Services
     /// Basic execution engine. Does only handle basic actions (start, stop, pause, resume, fail).
     /// </summary>
 
-    public abstract class Engine : ObservableObject, IEngine<EngineStatusCode>
+    public abstract class Engine : ObservableObject, IEngine<EngineStatusCode>, IDisposable
     {
         protected Engine()
         {
             _cancellationTokenSource = new CancellationTokenSource();
+        }
+
+        ~Engine()
+        {
+            Dispose(false);
+        }
+
+         // ReSharper disable once MemberCanBePrivate.Global
+        protected bool IsDisposed;
+        public  void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (IsDisposed)
+                return;
+            
+            // get rid of managed resources
+            try
+            {
+                _cancellationTokenSource.Cancel(false);
+                _cancellationTokenSource.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error when aborting engine execution");
+            }
+
+            // get rid of unmanaged resources
+            
+            IsDisposed = true;
         }
 
         /// <summary>
@@ -239,6 +273,7 @@ namespace KinoshitaProductions.Emvvm.Services
             try
             {
                 _cancellationTokenSource.Cancel(false);
+                _cancellationTokenSource.Dispose();
             }
             catch (Exception ex)
             {
