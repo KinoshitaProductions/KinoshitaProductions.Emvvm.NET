@@ -24,14 +24,14 @@
             
 #if WINDOWS_UWP
 #if NET7_0_OR_GREATER
-            public delegate bool NavigateToViewHandler(Microsoft.UI.Xaml.Controls.Frame frame, ObservableViewModel viewModel, bool useAnimations);
+            public delegate void NavigateToViewHandler(Microsoft.UI.Xaml.Controls.Frame frame, ObservableViewModel viewModel, bool useAnimations);
 #else
-            public delegate bool NavigateToViewHandler(Windows.UI.Xaml.Controls.Frame frame, ObservableViewModel viewModel, bool useAnimations);
+            public delegate void NavigateToViewHandler(Windows.UI.Xaml.Controls.Frame frame, ObservableViewModel viewModel, bool useAnimations);
 #endif
 #elif __ANDROID__
-            public delegate bool NavigateToViewHandler(Activity activity, ObservableViewModel viewModel, bool useAnimations);
+            public delegate void NavigateToViewHandler(Activity activity, ObservableViewModel viewModel, bool useAnimations);
 #else
-            public delegate bool NavigateToViewHandler(ObservableViewModel viewModel, bool useAnimations);
+            public delegate void NavigateToViewHandler(ObservableViewModel viewModel, bool useAnimations);
 #endif
         }
     }
