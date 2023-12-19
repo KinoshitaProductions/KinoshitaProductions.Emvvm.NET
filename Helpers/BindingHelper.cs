@@ -4,6 +4,7 @@ using System.ComponentModel;
 
 namespace KinoshitaProductions.Emvvm.Helpers;
 
+// ReSharper disable once UnusedType.Global
 public static class BindingHelper
 {    private static void RemoveItems<TItem, TBinding>(List<TBinding> bindings, NotifyCollectionChangedEventArgs e,
         Func<TItem,
