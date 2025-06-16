@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0;net7.0-android</TargetFrameworks>
+    <TargetFrameworks>net9.0;net9.0-android</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);net7.0-windows10.0.17763;</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <ProjectGuid>{78F4AE2D-1589-44E9-8068-2AAF56345BE9}</ProjectGuid>

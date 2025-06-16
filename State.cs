@@ -132,9 +132,9 @@
             {
                 position = NavigationStackPrivate.IndexOf(viewModel);
                 if (position != -1)
-                {
                     NavigationStackPrivate.Remove(viewModel);
-                }
+                else
+                    return;
             }
 
             // resort the stack assigned depths
