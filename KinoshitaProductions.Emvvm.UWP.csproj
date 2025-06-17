@@ -45,7 +45,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="KinoshitaProductions.Common.UWP">
-      <Version>1.0.0</Version>
+      <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>

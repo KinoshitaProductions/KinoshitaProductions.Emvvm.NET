@@ -1,0 +1,39 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Build 
+        shell: powershell
+        run: |
+          dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/KinoshitaProductions/index.json"
+          dotnet build KinoshitaProductions.Emvvm.csproj
+  build-uwp:
+    name: Build (UWP)
+    runs-on: windows-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Build (UWP)
+        shell: powershell
+        run: |
+          dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/KinoshitaProductions/index.json"
+          msbuild KinoshitaProductions.Emvvm.UWP.csproj -t:restore
+          msbuild KinoshitaProductions.Emvvm.UWP.csproj -t:build -verbosity:diag /p:Configuration=Release
